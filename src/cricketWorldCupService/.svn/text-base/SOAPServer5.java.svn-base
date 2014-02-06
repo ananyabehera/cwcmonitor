@@ -1,0 +1,116 @@
+package cricketWorldCupService;
+
+import java.rmi.RemoteException;
+import java.util.HashMap;
+import java.util.Iterator;
+import model.Match;
+import model.MatchEvent;
+import org.apache.axis2.AxisFault;
+import controller.CricketFactory;
+
+/*
+ * This is the adaptor class.
+ * Created by: Ananya Behera
+ * Modified On: 21.05.2013
+ */
+
+public class SOAPServer5 extends Server implements Runnable{
+
+	private SOAP5 soap5server;
+	private Thread thread5 = new Thread(this, "5");
+	
+	public SOAPServer5(int delayTime) throws AxisFault {
+		
+		this.delayTime = delayTime;
+		soap5server = new SOAP5();
+		matchesFromServer = new HashMap<String, Match>();
+		factory = new CricketFactory();
+		thread5.start();
+	}
+	
+	public void insertMatch(String matchId, Match aMatch){
+		
+		matchesFromServer.put(matchId, aMatch);
+	}
+
+	public void removeMatch(String matchId){
+		
+		if(matchesFromServer.containsKey(matchId)){
+			matchesFromServer.remove(matchId);
+		}
+	}
+	
+	public void run(){
+		
+		while(true){
+			try{
+				Iterator<String> i = matchesFromServer.keySet().iterator();
+				// only update match data on matches being viewed
+				while(i.hasNext()){
+					String id = i.next();
+					String[] lastBall = this.getLastEvent(id);
+					MatchEvent lastEvent = factory.createMatchEvent(lastBall);
+					matchesFromServer.get(id).setLastEvent(lastEvent);
+					matchesFromServer.get(id).notified(this.getFields());
+				}
+				long SleepTime = delayTime * 1000L;
+				Thread.sleep(SleepTime);
+			} catch (InterruptedException ie) {
+				System.err.println("InterruptedException: " + ie.getMessage());
+				ie.printStackTrace();
+			} catch (RemoteException re) {
+				System.err.println("RemoteException: " + re.getMessage());
+				re.printStackTrace();
+			}
+		}
+	}
+	
+	@Override
+	public String[] getMatchIDs() throws RemoteException {
+
+		return soap5server.getMatchIDs();
+	}
+
+	@Override
+	public String[] getMatchDetails(String ID) throws RemoteException {
+		
+		return soap5server.getMatchDetails(ID);
+	}
+
+	@Override
+	public String[] getLastEvent(String id) throws RemoteException {
+		
+		String[] temp = soap5server.getLastBall(id);
+		String[] temp2 = new String[temp.length];		
+		String[] data = temp[1].split("\\.");
+		String score = temp[temp.length-1] +"/"+temp[temp.length -2];
+
+		for(int i = 0; i < temp2.length; i++)
+		{
+			if( i == 0)
+			{
+				temp2[i] = temp[i];
+			}
+			else if(i == 1)
+			{
+				temp2[1] = data[0];
+				temp2[2] = data[1];	
+			}
+			else if ( i >2 && i != temp2.length-1)
+			{
+				temp2[i] = temp[i-1];
+			}
+			else if (i == temp2.length-1)
+			{
+				temp2[temp2.length-1] = score;
+			}
+		}
+		return temp2;
+	}
+
+	@Override
+	public String[] getFields() throws RemoteException {
+		
+		return soap5server.getBallFieldLabels();
+	}
+}

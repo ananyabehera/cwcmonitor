@@ -1,0 +1,91 @@
+package cricketWorldCupService;
+
+import java.rmi.RemoteException;
+import java.util.HashMap;
+import java.util.Iterator;
+import model.Match;
+import model.MatchEvent;
+import org.apache.axis2.AxisFault;
+import controller.CricketFactory;
+import cricketWorldCupService.CricketWorldCup2011ServiceStub.GetLastBall;
+import cricketWorldCupService.CricketWorldCup2011ServiceStub.GetMatchDetails;
+
+public class SOAP30 extends Server {
+	
+	public static CricketWorldCup2011ServiceStub CWCService;
+	private Thread thread30 = new Thread(this, "30");
+	
+	public SOAP30(int delayTime) throws AxisFault {
+		
+		this.delayTime = delayTime;
+		CWCService = new CricketWorldCup2011ServiceStub();
+		matchesFromServer = new HashMap<String, Match>();
+		factory = new CricketFactory();
+		thread30.start();
+	}
+
+	public void insertMatch(String matchId, Match aMatch){
+		
+		matchesFromServer.put(matchId, aMatch);
+	}
+	
+	public void removeMatch(String matchId){
+		
+		if(matchesFromServer.containsKey(matchId)){
+			matchesFromServer.remove(matchId);
+		}
+	}
+	
+	public void run(){
+		
+		while(true){
+			try{
+				Iterator<String> i = matchesFromServer.keySet().iterator();
+				// only update match data on matches being viewed
+				while(i.hasNext()){
+					String id = i.next();
+					String[] lastBall = this.getLastEvent(id);
+					MatchEvent lastEvent = factory.createMatchEvent(lastBall);
+					matchesFromServer.get(id).setLastEvent(lastEvent);
+					matchesFromServer.get(id).notified(this.getFields());
+				}
+				long SleepTime = delayTime * 1000L;
+				Thread.sleep(SleepTime);
+			} catch (InterruptedException ie) {
+				System.err.println("InterruptedException: " + ie.getMessage());
+				ie.printStackTrace();
+			} catch (RemoteException re) {
+				System.err.println("RemoteException: " + re.getMessage());
+				re.printStackTrace();
+			}
+		}
+	}
+	
+	@Override
+	public String[] getMatchIDs() throws RemoteException {
+		
+		return CWCService.getMatchIDS().get_return();
+	}
+
+	@Override
+	public String[] getMatchDetails(String ID) throws RemoteException {
+		
+		GetMatchDetails MatchDetailsRequest = new GetMatchDetails();
+		MatchDetailsRequest.setMatchID(ID);
+		return CWCService.getMatchDetails(MatchDetailsRequest).get_return();
+	}
+
+	@Override
+	public String[] getLastEvent(String id) throws RemoteException {
+
+		GetLastBall LastBallRequest = new GetLastBall();
+		LastBallRequest.setMatchID(id);
+		return CWCService.getLastBall(LastBallRequest).get_return();
+	}
+	
+	public String[] getFields() throws RemoteException {
+		
+		return CWCService.getBallFields().get_return();
+	}
+
+}

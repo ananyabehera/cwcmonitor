@@ -1,0 +1,95 @@
+package cricketModel;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+
+import matchFactory.Match;
+import matchFactory.MatchEvent;
+
+import observer.Observer;
+
+/*
+ * CricketMatch class represents cricket matches in the system.
+ * each cricket match is a subtype of match.
+ * 
+ * @author		Andreas Limberopoulos and Ananya Behera
+ * @modified	13052013
+ */
+public class CricketMatch extends Match{
+
+	// a list of strings created by tokenizing the server output
+	private List<String> details;
+	
+	/*
+	 * create objects of type cricket match
+	 */
+	public CricketMatch(String newID, String[] matchDetails) {
+		
+		id = newID;
+		details = new ArrayList<String>();
+		event = null;
+		observers = new HashMap<Integer, Observer>(); // maintain list of observers
+		for(int i =0; i < matchDetails.length; i++)	
+			details.add(matchDetails[i]);
+	}
+	
+	public List<String> getMatchDetails() {
+		
+		return details;
+	}
+
+	public String getMatchID() {
+		
+		return id;
+	}
+	
+	public void setLastEvent(MatchEvent event) {
+		
+		this.event = (LastBall) event;
+	}
+	
+	public MatchEvent getLastEvent() {
+		
+		return event;
+	}
+	
+	/*
+	 * attach an observer as per observer pattern
+	 */
+	@Override
+	public void attach(Observer newObserver) {
+		
+		observers.put(newObserver.getID(), newObserver);
+	}
+
+	/*
+	 * detach an observer as per observer pattern
+	 */
+	@Override
+	public void detach(Observer removedObserver) {
+		
+		observers.remove(removedObserver);
+	}
+
+	public Observer getMatchObserver(int id) {
+		
+		return observers.remove(id);
+	}
+	
+	/*
+	 * inform all observers of match that something has changed.
+	 */
+	@Override
+	public void notified(String[] fields) {
+		
+		Iterator<Integer> it = observers.keySet().iterator();
+		while(it.hasNext())
+		{
+			//String[] aBall = this.getLastEvent().getEventDetails();
+			Observer temp = observers.get(it.next());
+			temp.update(fields);
+		}	
+	}
+}

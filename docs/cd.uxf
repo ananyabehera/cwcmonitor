@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.0">
+  <zoom_level>6</zoom_level>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>336</x>
+      <y>780</y>
+      <w>24</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>18;18;18;72</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>306</x>
+      <y>132</y>
+      <w>114</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>18;108;18;54;102;54;102;18</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>150</x>
+      <y>18</y>
+      <w>192</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>SOAP30
+--
++CricketWorldCup2011ServiceStub CWCService
+-Thread thread30
+--
++SOAP30(int delayTime)
++insertMatch(String matchId, Match aMatch)
++removeMatch(String matchId)
++run()
++getMatchIDs()
++getMatchDetails(String ID)
++getLastEvent(String id)
++getFields()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>282</x>
+      <y>738</y>
+      <w>180</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>/MatchEvent/
+--
+#String[] eventDetails
+--
++getEventDetails()
++setEventDetails(String[] event)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>852</x>
+      <y>672</y>
+      <w>24</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>18;18;18;66</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Note</type>
+    <coordinates>
+      <x>24</x>
+      <y>24</y>
+      <w>84</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Note..
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>258</x>
+      <y>852</y>
+      <w>180</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>LastBall
+--
+--
++LastBall(String[] event)
++getEventDetails()
++setEventDetails(String[] event)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>876</x>
+      <y>570</y>
+      <w>30</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>18;18;18;54</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>588</x>
+      <y>636</y>
+      <w>144</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>/Match/
+--
+#String id
+#MatchEvent event
+--
++getMatchDetails()
++getMatchID()
++getLastEvent()
++notified(String[] strings)
++getMatchObserver(int id)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>228</x>
+      <y>240</y>
+      <w>228</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>/Server/
+--
+#int delayTime
+#MatchFactory factory
+#HashMap&lt;String, Match&gt; matchesFromServer
+--
++getMatchIDs()
++insertMatch(String matchId, Match aMatch)
++removeMatch(String matchId)
++getMatchDetails(String ID)
++getLastEvent(String id)
++getFields()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>798</x>
+      <y>738</y>
+      <w>192</w>
+      <h>156</h>
+    </coordinates>
+    <panel_attributes>TextView
+--
+-JFrame frame
+-JPanel totalGUI
+-JButton 
+-JLabel descLbl
+-JPanel ballPanel, descPanel, buttonPanel
+--
++TextView(Match match)
+-initilize()
+-createContentPane()
+-createWidgets()
++buttonActionListener(ActionListener al)
++update(String[] fields)
+-updateBallData(String[] fields, LstBall ball)
++getID()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>366</x>
+      <y>582</y>
+      <w>234</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+holds a
+users selected</panel_attributes>
+    <additional_attributes>222;114;48;114;48;18</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>444</x>
+      <y>714</y>
+      <w>198</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+is played 
+through</panel_attributes>
+    <additional_attributes>18;54;168;54;168;18</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>270</x>
+      <y>132</y>
+      <w>66</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>54;108;54;54;18;54;18;18</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>114</x>
+      <y>648</y>
+      <w>24</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>18;18;18;108</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>624</x>
+      <y>714</y>
+      <w>24</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>18;18;18;102</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>132</x>
+      <y>684</y>
+      <w>462</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;creates&gt;&gt;</panel_attributes>
+    <additional_attributes>456;30;42;30;42;72</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>204</x>
+      <y>582</y>
+      <w>128</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+&lt;&lt;creates&gt;&gt;
+</panel_attributes>
+    <additional_attributes>18;60;90;60;90;18</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>42</x>
+      <y>756</y>
+      <w>180</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>CricketFactory
+--
+--
++CricketFactory()
++createMatch(String ID, String[] details)
++createMatchEvent(String[] event)
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>666</x>
+      <y>360</y>
+      <w>234</w>
+      <h>138</h>
+    </coordinates>
+    <panel_attributes>SelectMatchScreen
+--
+-JPanel totalGUI, comboPanel, btnPanel, matchListPanel
+-JComboBox serverComboBox
+-JButton btnText, btnGraph
+-JList matchList
+-JScrollPane scrollPane
+--
++SelectMatchScreen(String[] serverArray)
++initialise(String[] serverArray)
+-createContentPane(String[] serverArray)
++populateMatches(String[] matchIds)
++comboActionListener(ActionListener al)
++listSelectionListener(ListSelectionListener lsl)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>714</x>
+      <y>642</y>
+      <w>138</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+watches</panel_attributes>
+    <additional_attributes>18;30;132;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>318</x>
+      <y>336</y>
+      <w>30</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>18;18;18;72</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>438</x>
+      <y>318</y>
+      <w>162</w>
+      <h>366</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+maintains
+a list of</panel_attributes>
+    <additional_attributes>150;354;96;354;96;18;18;18</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>846</x>
+      <y>624</y>
+      <w>120</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>/Monitor/
+--
++int id
++Match monitoredMatch
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>492</x>
+      <y>210</y>
+      <w>210</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>SOAP5
+--
++CricketWorldCup2011ServiceTwoStub CWCService
+--
++SOAP()
++getMatchIDs()
++getMatchDetails(String ID)
++getLastBall(String id)
++getBallFieldLabels()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>672</x>
+      <y>576</y>
+      <w>30</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>18;18;18;60</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>468</x>
+      <y>408</y>
+      <w>210</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+&lt;&lt;creates&gt;&gt;</panel_attributes>
+    <additional_attributes>198;30;18;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>366</x>
+      <y>18</y>
+      <w>192</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>SOAPServer5
+--
+-SOAP5 soap5server
+-Thread thread5
+--
++SOAPServer5(int delayTime)
++insertMatch(String matchId, Match aMatch)
++removeMatch(String matchId)
++run()
++getMatchIDs()
++getMatchDetails(String ID)
++getLastEvent(String id)
++getFields()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1002</x>
+      <y>630</y>
+      <w>186</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>GraphView
+--
+-JFrame frame
+-JPanel totalGUI, btnPanel, graphPanel
+-Match monitoredMatch
+-XYSeries runRateSeries
+-XYSeriesCollection dataset
+-JButton btnCloseMonitor
+-JFreeChart chart
+-double[] rates
+-double run_rate, runsOver
+-int flag, ballCount, over, overcount
+--
++GraphView(Match monitoredMatch)
+-initialize()
+-addContent()
+-createDataset
++update(String[] fields)
+-createChart(XYDataset dataset)
++getID()
++buttonActionListener(ActionListern al)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>576</x>
+      <y>516</y>
+      <w>186</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>/Subject/
+--
+#HashMap&lt;Integer, Observer&gt; observers
+--
++attach(Observer newObserver)
++detach(Observer removedObserver)
++notified(String[] strings)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>204</x>
+      <y>750</y>
+      <w>84</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;creates&gt;&gt;</panel_attributes>
+    <additional_attributes>78;30;18;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>840</x>
+      <y>534</y>
+      <w>108</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>/Observer/
+--
+#int count
+--
++update(String[] fields)
++getID()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>744</x>
+      <y>540</y>
+      <w>108</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+attaches</panel_attributes>
+    <additional_attributes>96;30;18;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>42</x>
+      <y>606</y>
+      <w>180</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>/MatchFactory/
+--
+--
++createMatch(String ID, String[] details)
++createMatchEvent(String[] event)
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>258</x>
+      <y>408</y>
+      <w>228</w>
+      <h>192</h>
+    </coordinates>
+    <panel_attributes>Controller
+--
+-Controller controller
+-Server server5, server30, currServer
+-MatchFactory factory
+-HashMap&lt;String, Match&gt; matches
+-SelectMatchScreen view
+-JComboBox cb
+-Match tempMatch
+-String comboSelection
+--
++main()
++controller()
++actionPerformed(ActionEvent e)
++createTextMonitor()
++createGraphicalMonitor()
++findServer()
++closeMonitor(ActionEvent e)
++comboBoxChanging(String actionCmd, ActionEvent e)
++valueChanged(ListSelectionEvent e)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>540</x>
+      <y>78</y>
+      <w>108</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>18;18;96;18;96;132</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>534</x>
+      <y>816</y>
+      <w>210</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>CricketMatch
+--
+-List&lt;String&gt; details
+--
++CricketMatch(String newID, String[] matchDetails)
++getMatchDetails()
++getMatchID()
++setLastEvent(MatchEvent event)
++getLastEvent()
++attach(Observer newObserver)
++detach(Observer removedObserver)
++getMatchObserver(int id)
++notified(String[] fields)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>948</x>
+      <y>648</y>
+      <w>60</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>18;18;54;18;54;18</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>126</x>
+      <y>294</y>
+      <w>114</w>
+      <h>324</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+makes objects
+with
+</panel_attributes>
+    <additional_attributes>48;312;48;30;102;30</additional_attributes>
+  </element>
+</diagram>
